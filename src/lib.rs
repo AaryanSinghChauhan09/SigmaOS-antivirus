@@ -1,31 +1,42 @@
-// SPDX-License-Identifier: Apache-2.0
-//! SigmaOS-antivirus - Security/Server component
-//! Part of SigmaOS multi-repository architecture
+//! SigmaOS-antivirus - SigmaOS Component
+//!
+//! Web, monitoring, and security component for SigmaOS.
 
-#![no_std]
+use anyhow::Result;
+use log::info;
+use serde::{Deserialize, Serialize};
 
-/// Component
-pub struct Component {
-    name: &'static str,
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Config {
+    pub enabled: bool,
+    pub production_mode: bool,
 }
 
-impl Component {
-    pub fn new() -> Self {
-        Self { name: "SigmaOS-antivirus" }
-    }
-}
-
-impl Default for Component {
+impl Default for Config {
     fn default() -> Self {
-        Self::new()
+        Self { enabled: true, production_mode: false }
     }
 }
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test_creation() {
-        let c = super::Component::new();
-        assert_eq!(c.name, "SigmaOS-antivirus");
+pub struct antivirus {
+    config: Config,
+}
+
+impl antivirus {
+    pub fn new(config: Config) -> Self {
+        Self { config }
+    }
+
+    pub fn initialize(&mut self) -> Result<()> {
+        info!("Initializing SigmaOS-antivirus");
+        if self.config.production_mode {
+            info!("Production mode enabled");
+        }
+        Ok(())
+    }
+
+    pub fn start(&mut self) -> Result<()> {
+        info!("Starting SigmaOS-antivirus");
+        Ok(())
     }
 }
