@@ -1,9 +1,9 @@
 # SigmaOS-antivirus
 
-Antivirus component for SigmaOS
+Antivirus for SigmaOS inspired by SigmaOS Linux
 
-- **Category:** Security
-- **Engine:** security
+- **Category:** Utilities
+- **Engine:** antivirus
 - **Language:** Rust
 
 ## Build & Test
